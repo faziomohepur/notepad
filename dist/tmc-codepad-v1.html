@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<title>TmC CodePad — Note & Code</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/dialog/dialog.min.css">
+<style>
+:root{color-scheme:dark;--bg:#080d18;--panel:#111a2b;--panel2:#172238;--line:#293750;--text:#eaf1ff;--muted:#9baac4;--accent:#65e0c2;--accent2:#8ab4ff;--danger:#ff8585}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top right,#152849 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+header{padding:18px clamp(14px,3vw,30px) 14px;border-bottom:1px solid var(--line);background:#0a1120d9;position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}
+.top{max-width:1500px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#65e0c2,#8ab4ff);color:#08111f;font-weight:900;font-size:18px;box-shadow:0 8px 30px #65e0c233}.brand h1{font-size:19px;margin:0;letter-spacing:.2px}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.pill{border:1px solid #285b57;color:var(--accent);background:#102b2b;border-radius:999px;padding:6px 10px;font-size:12px;white-space:nowrap}
+main{max-width:1500px;margin:auto;padding:18px clamp(10px,2vw,26px) 26px}.toolbar,.subbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}.btn,select,.searchbox input,.filename{font:inherit;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:40px}.btn{cursor:pointer;transition:.15s ease;font-weight:650}.btn:hover{border-color:var(--accent);transform:translateY(-1px)}.btn.primary{background:var(--accent);color:#06131b;border-color:transparent}.btn.soft{background:#18263b}.btn.warn{color:#ffb5b5}.filename{flex:1;min-width:150px;font-weight:650}.toolbar .spacer{flex:1}.subbar{padding:10px;background:var(--panel);border:1px solid var(--line);border-radius:12px}.searchbox{display:flex;gap:7px;flex:1;min-width:210px}.searchbox input{width:100%;min-width:0}.editor-card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#101722;box-shadow:0 18px 55px #0003}.editor-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;background:#121d30;border-bottom:1px solid var(--line);flex-wrap:wrap}.filetag{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}.dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}.status{font-size:12px;color:var(--muted)}#editor{height:min(66vh,760px);min-height:340px}.CodeMirror{height:100%;font:14px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:10px 0}.CodeMirror-gutters{background:#111a29;border-right:1px solid #28354a}.CodeMirror-linenumber{color:#657692}.CodeMirror-cursor{border-left:2px solid var(--accent)!important}.CodeMirror-selected{background:#244d62!important}.footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:12px;padding:12px 3px}.hint{margin-top:14px;padding:13px 15px;border:1px solid #263851;border-radius:12px;color:var(--muted);font-size:13px;background:#0f1827}.hint strong{color:var(--text)}.kbd{font:11px ui-monospace,monospace;border:1px solid #3a4961;border-radius:5px;padding:2px 5px;color:#c7d7ef}
+body.light{--bg:#eef3f9;--panel:#fff;--panel2:#f5f8fc;--line:#d5dfeb;--text:#17243a;--muted:#5e6e84;background:radial-gradient(ellipse at top right,#dceaff 0,transparent 42%),var(--bg);color:var(--text)}body.light header{background:#f6f9fbe8}body.light .editor-card{background:#fff}body.light .editor-head{background:#f4f7fb}body.light .CodeMirror{background:#fbfdff;color:#17243a}body.light .CodeMirror-gutters{background:#f1f5fa}body.light .CodeMirror-linenumber{color:#8592a6}body.light .hint{background:#f8fbff}body.light .btn{color:#17243a}body.light .btn.primary{color:#06131b}body.light .pill{background:#e5f8f3;color:#08765f}
+@media(max-width:640px){header{padding:12px}.brand h1{font-size:17px}.logo{width:38px;height:38px}main{padding:12px 8px 20px}.toolbar{gap:6px}.btn{padding:9px 10px;font-size:13px;min-height:38px}.filename{order:1;flex-basis:100%}.toolbar .spacer{display:none}#editor{height:58vh;min-height:300px}.CodeMirror{font-size:13px}.subbar{padding:8px}.status{width:100%}.pill{font-size:11px}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="brand"><div class="logo">T</div><div><h1>TmC CodePad</h1><p>Ghi chú · Soạn code · Copy nhanh</p></div></div><span class="pill">● LOCAL DRAFT · Không cần đăng nhập</span></div></header>
+<main>
+  <div class="toolbar">
+    <input id="filename" class="filename" value="note.js" aria-label="Tên file" placeholder="Tên file, ví dụ note.js">
+    <select id="mode" aria-label="Ngôn ngữ"><option value="javascript">JavaScript</option><option value="htmlmixed">HTML</option><option value="css">CSS</option><option value="application/json">JSON</option><option value="text/plain">Text / Ghi chú</option><option value="xml">XML</option><option value="markdown">Markdown</option></select>
+    <button class="btn primary" id="copyAll">Copy tất cả</button>
+    <button class="btn" id="copySelection">Copy đoạn chọn</button>
+    <button class="btn" id="copyLine">Copy dòng</button>
+    <button class="btn soft" id="openFile">Mở file</button>
+    <button class="btn soft" id="download">Tải file</button>
+    <button class="btn" id="theme">☼ Sáng</button>
+    <input type="file" id="fileInput" hidden>
+  </div>
+  <div class="subbar">
+    <div class="searchbox"><input id="findText" placeholder="Tìm nội dung…"><button class="btn" id="find">Tìm</button><input id="replaceText" placeholder="Thay bằng…"><button class="btn" id="replace">Thay</button><button class="btn" id="replaceAll">Thay tất cả</button></div>
+    <button class="btn" id="selectAll">Chọn tất cả</button><button class="btn warn" id="clear">Xóa nội dung</button>
+  </div>
+  <section class="editor-card">
+    <div class="editor-head"><div class="filetag"><span class="dot"></span><span id="fileLabel">note.js</span><span>·</span><span id="modeLabel">JavaScript</span></div><div class="status" id="status">Sẵn sàng · Bản nháp lưu trên thiết bị này</div></div>
+    <div id="editor"></div>
+  </section>
+  <div class="footer"><span id="stats">Dòng 1 · 0 ký tự</span><span>Phím tắt: <span class="kbd">Ctrl/Cmd + F</span> tìm kiếm · <span class="kbd">Tab</span> thụt dòng</span></div>
+  <div class="hint"><strong>Mẹo cho iPhone:</strong> chạm vào vùng code rồi dùng nút <strong>Copy tất cả</strong> hoặc chọn một đoạn rồi bấm <strong>Copy đoạn chọn</strong>. Bản nháp chỉ lưu trong trình duyệt trên thiết bị hiện tại; hãy bấm <strong>Tải file</strong> để giữ bản sao quan trọng.</div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/markdown/markdown.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/search/searchcursor.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/dialog/dialog.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/search/search.min.js"></script>
+<script>
+(() => {
+ const $=id=>document.getElementById(id);
+ const editor=CodeMirror($('editor'),{value:'// Chào ní! Dán code hoặc ghi chú vào đây nhé.\\n// Dùng nút Copy để lấy nội dung nhanh.\\n',mode:'javascript',theme:'material-darker',lineNumbers:true,lineWrapping:false,indentUnit:2,tabSize:2,indentWithTabs:false,autocorrect:false,spellcheck:false,extraKeys:{'Ctrl-F':'findPersistent','Cmd-F':'findPersistent','Ctrl-S':()=>download(),'Cmd-S':()=>download(),'Tab':cm=>cm.replaceSelection('  ','end')}});
+ const draftKey='tmc-codepad-v1-draft';
+ let saveTimer;
+ const modeNames={'javascript':'JavaScript','htmlmixed':'HTML','css':'CSS','application/json':'JSON','text/plain':'Text / Ghi chú','xml':'XML','markdown':'Markdown'};
+ function setStatus(t){$('status').textContent=t}
+ function stats(){const v=editor.getValue();$('stats').textContent=`Dòng ${editor.lineCount()} · ${v.length.toLocaleString()} ký tự`}
+ function saveDraft(){try{localStorage.setItem(draftKey,JSON.stringify({text:editor.getValue(),filename:$('filename').value,mode:$('mode').value,updated:Date.now()}));setStatus('Đã lưu bản nháp trên thiết bị này')}catch(e){setStatus('Không lưu được bản nháp — hãy tải file để sao lưu')}}
+ function scheduleSave(){stats();setStatus('Đang lưu…');clearTimeout(saveTimer);saveTimer=setTimeout(saveDraft,350)}
+ function syncLabels(){ $('fileLabel').textContent=$('filename').value||'untitled.txt';$('modeLabel').textContent=modeNames[$('mode').value]||'Code';}
+ async function copyText(text){try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text)}else{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();if(!ok)throw new Error('copy failed')}setStatus('Đã copy vào clipboard ✓')}catch(e){setStatus('Trình duyệt chặn copy — hãy chọn nội dung và dùng Copy của iPhone');}}
+ function download(){const name=($('filename').value||'note.txt').trim().replace(/[\\/:*?"<>|]/g,'_');const blob=new Blob([editor.getValue()],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name.includes('.')?name:name+'.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);setStatus('Đã tạo file tải về')}
+ editor.on('change',scheduleSave);
+ $('filename').addEventListener('input',()=>{syncLabels();scheduleSave()});
+ $('mode').addEventListener('change',()=>{editor.setOption('mode',$('mode').value);syncLabels();scheduleSave()});
+ $('copyAll').onclick=()=>copyText(editor.getValue());
+ $('copySelection').onclick=()=>{const s=editor.getSelection();if(!s){setStatus('Chưa chọn đoạn nào — bôi chọn code trước nhé');return}copyText(s)};
+ $('copyLine').onclick=()=>{const c=editor.getCursor();copyText(editor.getLine(c.line)||'')};
+ $('selectAll').onclick=()=>{editor.execCommand('selectAll');editor.focus();setStatus('Đã chọn tất cả nội dung')};
+ $('openFile').onclick=()=>$('fileInput').click();
+ $('fileInput').onchange=async e=>{const f=e.target.files[0];if(!f)return;editor.setValue(await f.text());$('filename').value=f.name;const ext=f.name.split('.').pop().toLowerCase();const modes={js:'javascript',mjs:'javascript',cjs:'javascript',html:'htmlmixed',htm:'htmlmixed',css:'css',json:'application/json',md:'markdown',xml:'xml',txt:'text/plain'};$('mode').value=modes[ext]||'text/plain';editor.setOption('mode',$('mode').value);syncLabels();scheduleSave();e.target.value='';setStatus('Đã mở '+f.name)};
+ $('download').onclick=download;
+ $('theme').onclick=()=>{const light=document.body.classList.toggle('light');editor.setOption('theme',light?'default':'material-darker');$('theme').textContent=light?'☾ Tối':'☼ Sáng';try{localStorage.setItem('tmc-codepad-theme',light?'light':'dark')}catch(e){}};
+ $('find').onclick=()=>{const q=$('findText').value;if(!q)return;const cur=editor.getSearchCursor(q,editor.getCursor());if(cur.findNext()){editor.setSelection(cur.from(),cur.to());editor.focus();setStatus('Đã tìm thấy nội dung')}else{const first=editor.getSearchCursor(q,{line:0,ch:0});if(first.findNext()){editor.setSelection(first.from(),first.to());editor.focus();setStatus('Đã tìm từ đầu văn bản')}else setStatus('Không tìm thấy nội dung')}};
+ $('findText').addEventListener('keydown',e=>{if(e.key==='Enter')$('find').click()});
+ $('replace').onclick=()=>{const q=$('findText').value;if(!q)return;const cur=editor.getSearchCursor(q,editor.getCursor());if(cur.findNext()){cur.replace($('replaceText').value);editor.focus();setStatus('Đã thay một vị trí')}else $('find').click()};
+ $('replaceAll').onclick=()=>{const q=$('findText').value;if(!q)return;let cur=editor.getSearchCursor(q,{line:0,ch:0}),n=0;while(cur.findNext()){cur.replace($('replaceText').value);n++;cur=editor.getSearchCursor(q,cur.to())}setStatus(`Đã thay ${n} vị trí`)};
+ $('clear').onclick=()=>{if(confirm('Xóa toàn bộ nội dung trong khung soạn thảo?')){editor.setValue('');editor.focus();setStatus('Đã xóa nội dung')}};
+ try{const d=JSON.parse(localStorage.getItem(draftKey)||'null');if(d&&typeof d.text==='string'){editor.setValue(d.text);$('filename').value=d.filename||'note.js';$('mode').value=d.mode||'javascript';editor.setOption('mode',$('mode').value)}}catch(e){}
+ try{if(localStorage.getItem('tmc-codepad-theme')==='light'){$('theme').click()}}catch(e){}
+ syncLabels();stats();editor.focus();
+})();
+</script>
+</body>
+</html>
