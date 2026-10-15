@@ -1,0 +1,11 @@
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+
+/*/*
+  Access-Control-Allow-Origin: *
+  X-Robots-Tag: nosnippet
+
+https://note.tmc.io.vn/*
+  X-Robots-Tag: noindex
